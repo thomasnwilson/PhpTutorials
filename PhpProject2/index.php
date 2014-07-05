@@ -9,11 +9,11 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Php Project 2</title>
+        <title>PHP Project 2</title>
     </head>
     <body>
         
-        <?php 
+    <?php 
     echo "ssss<br/>";
     $db = new mysqli("localhost", "phpTest", "o", "redcap");
     if($db->connect_error) {
@@ -24,15 +24,14 @@ and open the template in the editor.
     $result = $db->query($sql);
     echo "eeewewew<br/>";
     
-    echo $sql + "<br/>";
-    echo $result + "<br/>";
-?>        
+    echo $sql . "<br/>";
+    ?>        
         
-        afjlkfadfdsafdsa
+        break breakable<br/>
         <table cellSpacing="2" cellPaddin="6" align="center" border="1">
             <tr>
-                <td colspan="4">
-                    <h3 align="center">Header2</h3>
+                <td colspan="3">
+                    <h3 align="center">redcap_projects</h3>
                 </td>
             </tr>
             <tr>
@@ -40,10 +39,52 @@ and open the template in the editor.
                 <td>Name</td>
                 <td>Title</td>
             </tr>
-            
 
+            <?php 
+            while ($row = $result->fetch_assoc()) {?>
+                <tr>
+                    <td><?php echo $row['project_id']; ?></td>
+                    <td><?php echo $row['project_name']; ?></td>
+                    <td><?php echo $row['app_title']; ?></td>
+                </tr>
+            <?php }
+            ?>
         </table>
+        <br/>
+        
+        
+        <?php 
+        function printCell($row, $columnName) {      
+            $p = $row[$columnName];
+            echo '<td>'.$p.'</td>';
+        }
+        ?>
+        <table cellSpacing="2" cellPaddin="6" align="center" border="1">
+            <tr>
+                <td colspan="3">
+                    <h3 align="center">redcap_projects2</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>ID2</td>
+                <td>Name2</td>
+                <td>Title2</td>
+            </tr>
 
+            <?php 
+            $result = $db->query($sql);
+            while ($row = $result->fetch_assoc()) {?>
+                <tr>
+                    <?php
+                    printCell($row, 'project_id');
+                    printCell($row, 'project_name');
+                    printCell($row, 'app_title');
+                    ?>
+                </tr>
+            <?php } ?>
+        </table>
+        <br/>        
+        
         
         
         <?php if(!empty($_POST['participantID'])) {
@@ -67,5 +108,29 @@ and open the template in the editor.
         <li>status</li>
         <li>deleted</li>
     </ul>
+    
+    <?php
+    $creator = array(
+        'Light bulb' => "Edison", //key => value
+        'Rotary' => "Wankel",
+        'EBDB' => "Taco");
+    
+    foreach ($creator as $key => $value) {
+        echo "{$value} created the {$key}.<br/>";
+    }
+    
+    asort($creator);
+    foreach ($creator as $key => $value) {
+        echo "{$value} created the {$key}.<br/>";
+    }
+    echo $creator ."<br/>"    
+    ?>
+    
+    <?php
+    
+    ?>
+    
+    
+    
     </body>
 </html>
